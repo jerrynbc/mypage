@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> waf api </title>
+	<meta charset="utf-8">
+
+
+
+</head>
+<body>
+
+<form> 
+waf_url <input type="text" name="waf_url" clos='100' value='https://172.16.155.126'>	<br />
+cookie 	<input type="text" name="cookie">	<br />
+api <input type>
+
+<input type="submit" name="submit">
+</form>
+
+<br> <br>
+
+
+<!-- 改变内容 innerHTML -->
+<button type="button"
+onclick="document.getElementById('demo').innerHTML = Date()">
+点击这里来显示日期和时间
+</button>
+<p id="demo"></p>
+
+<!-- 改变属性 .src -->
+<button type="button"
+onclick="document.getElementById('jpg').src ='887.jpg'">
+不要妹子</button>
+<img src="girl.png" id='jpg' height="200" width="300">
+<button type="button"
+onclick="document.getElementById('jpg').src = 'girl.png'">
+要妹子</button>
+
+
+<!-- 改变样式 style.fontSize -->
+<!-- document.getElementById("demo").style.fontSize = "25px"; -->
+
+<p id='t1'> 可能会不见哦 </p>
+<button type="button"
+onclick="document.getElementById('t1').style.display='none'">
+消失！</button>
+<button type="button"
+onclick="document.getElementById('t1').style.display='block'">
+出现!</button>
+
+
+<!-- 
+	script需要被触发，如果不能放在某个触发控件中，那么就丢在script标签中 
+	可能会包含顺序	
+-->
+<p id='t2'> 用来验证script </p>
+<script type="text/javascript">
+	document.getElementById('t2').innerHTML='我改了标签的值';
+</script>
+
+
+<!-- 
+	可以通过function来定义一个函数，让button等事件直接触发
+	这里没有严格的顺序要求，放在head 或 body都可以，但是w3c说脚本放到前面会拖慢显示速度，所以尽可能的往后丢
+	
+-->
+<button type='button' onclick="myfunction()">再改一次</button>
+<script>
+function myfunction() {
+	document.getElementById('t2').innerHTML='我又改了标签的值';
+}
+</script>
+
+
+
+<!-- 引用外部js脚本 
+function myfunction() {
+	document.getElementById('t2').innerHTML='我又又改了标签的值';
+}
+	看起来会等待上一个button处理完才会执行这个js，还是有顺序的呀
+-->
+<script src='t2_mod.js'></script>
+
+
+
+
+<!-- js的显示方案 
+	使用 window.alert() 写入警告框
+	使用 document.write() 写入 HTML 输出
+	使用 innerHTML 写入 HTML 元素
+	使用 console.log() 写入浏览器控制台
+-->
+<p id='1'>用于演示innerHTML输入</p>
+<p id='2'>用于演示innerHTML输入</p>
+<p id='1'></p>
+<p id='1'></p>
+<script>
+	document.getElementById('1').innerHTML='通过innerHTML来写入元素';
+	document.getElementById('2').innerHTML=1+2;
+	document.write('write可以直接写入到html中\n\r 仅用于测试，因为在页面完全加载后，会删除页面内容')
+	document.write(5+6)
+	// window.alert('通过alert弹框来输出')
+	// window.alert(5+6)
+	console.log('这一段文字被写入了控制台，通过F12来查看')
+	console.log(5+6)
+</script>
+
+
+
+<!--  html事件
+	网页加载完成
+	输入字段被修改
+	按钮被点击
+
+		注意：script标签和button标签不能混用
+				js会区分大小写
+
+	onchange	HTML 元素已被改变
+	onclick		用户点击了 HTML 元素
+	onmouseover	用户把鼠标移动到 HTML 元素上
+	onmouseout	用户把鼠标移开 HTML 元素
+	onkeydown	用户按下键盘按键
+	onload		浏览器已经完成页面加载
+ -->
+<p id='event'> 这里用于事件的测试输出 </p>
+
+<button onclick='document.getElementById("event").innerHTML=Date()'> 显示时间 </button>
+
+<button onclick='this.innerHTML=Date()'> 显示时间 </button>
+
+<button onclick='displayDate()'> 显示时间 </button>
+<script>function displayDate() {document.getElementById('event').innerHTML=11111;}</script>
+
+
+
+
+
+
+<!-- 下面开始基础语法练习 
+break			终止 switch 或循环。
+continue		跳出循环并在顶端开始。
+debugger		停止执行 JavaScript，并调用调试函数（如果可用）。
+do ... while	执行语句块，并在条件为真时重复代码块。
+for				标记需被执行的语句块，只要条件为真。
+function		声明函数。
+if ... else		标记需被执行的语句块，根据某个条件。
+return			退出函数。
+switch			标记需被执行的语句块，根据不同的情况。
+try ... catch	对语句块实现错误处理。
+var				声明变量。
+	数字、字符串、数组、对象、布尔型、未定义undefined、空值null
+	null == undefined 但类型不同
+
+
+
+-->
+<p id='output'>这里用来输出js的执行结果</p>
+<script>
+	var x,y;x=4;y=5;
+	// window.alert(x+y);
+	// typeof 用于输出类型
+	var result=typeof x;
+
+	function xx(p1,p2){
+		return p1*p2;
+	}
+	result=xx(2,4);
+
+	// 对象的方法，其实就是字典
+	var car = {name:"xfl",price:"888",color:"write",
+		xx:function() {return this.name + ' ' + this.price}
+	};
+	result = car.xx();
+	result = car['name']
+	
+	// 字符串
+	var txt = "The full name of China is the People's Republic of China.";
+	result=txt.length;
+	var oo = new String('zrdsg');  // 不建议使用
+	result= (txt == oo);
+	result= (txt === oo);	//对象和字符串等值但不等型，另外不同的对象不能比较
+	// 检索字符串
+	result = txt.indexOf('r');
+	result = txt.lastIndexOf('name',18);
+	result = txt.search('is') 	 // 支持正则
+	// 切片
+	result = txt.slice(0,3)
+	result = txt.slice(3)	//省略第二个参数，默认返回剩余的结果
+	result = txt.substring(0,3)	//substring也是切片，但是参数不接受负数
+	result = txt.substr(4,4)	// substr的第二个参数不是位置，而是长度
+	// 替换
+	result = txt.replace('full','empty') // 旧 - 新
+	result = txt.replace(/the/i,'empty') // 使用i来忽略大小写，注意正则不用引号
+	result = txt.replace(/the/ig,'empty') // 替换所有字符，加上 g
+	// 转换大小写
+	result = txt.toUpperCase();
+	result = txt.toLowerCase();
+	// 连接字符 有点类似mysql了
+	result = txt.concat('+++++','wakkkkkkk')	//第一个字符是链接符
+	// 删除两端空格
+	result = '     xx       '.trim()
+	// 提取字符串
+	result = txt.charAt(0)	// 根据索引位
+	result = txt.charCodeAt(0); // 根据索引，返回unioncode编码
+	result = txt[0]	//python读取方式，但不支持切片
+	// 分割，输出的是数组
+	result = txt.split(' ')
+
+
+	// 数字。64位浮点数
+	result = 1.1111
+	result = 1e5
+	result = 1e-5
+	result = (0.2 *10 + 0.1 *10)/10     //浮点数运算不准确，需要转换成整数来运算
+
+	result = 0.2 + 0.1
+	result = 0xff;		//16进制
+
+	result=(result+122).toString();		//返回数值
+	// result = result.toString(16);	//10转16进制
+	// result = result.toString(2);		//10转2进制	
+
+
+	var a = 9.18888;
+	// result = result.toExponential(4); ；	//返回字符串，指数计数方式
+	// Number()	返回数字，由其参数转换而来。
+	// parseFloat()	解析其参数并返回浮点数。
+	// parseInt()	解析其参数并返回整数。	只返回首个数字
+	result = a.toFixed(2);		//返回字符串，可以指定小数点的位数
+	result = a.toPrecision(3)	//返回字符串，可以指定长度，自动四舍五入
+	result = a.valueOf()		//返回原始数值
+
+	result = Number(new Date("2019-04-15"));  //转成时间戳
+
+	// Number的一些属性
+	// MAX_VALUE	返回 JavaScript 中可能的最大数。
+	// MIN_VALUE	返回 JavaScript 中可能的最小数。
+	// NEGATIVE_INFINITY	表示负的无穷大（溢出返回）。
+	// NaN	表示非数字值（"Not-a-Number"）。
+	// POSITIVE_INFINITY	表示无穷大（溢出返回）。
+	result = Number.MAX_VALUE;	//最大值
+
+
+
+
+	var cars = ["a","b","c"];
+	cars = new Array('c','b','a')
+	result = cars[0];
+	cars[0] = 'hhh';
+
+	result = cars.length;
+	result = cars.sort();	//从小到大
+	result = cars.reverse(); //从大到小
+
+//	自定义排序函数	
+// 	var points = [40, 100, 1, 5, 25, 10];
+// points.sort(function(a, b){return b - a}); 	// a>b false 
+// points.sort(function(a, b){return 0.5 - Math.random()}); 	// 打乱顺序
+
+
+	// 两种遍历方式
+	// for (i=0;i<cars.length;i++)
+	// 	{window.alert(cars[i])}
+
+	// result = cars.forEach(myFunction)	为每个数组元素调用一次函数
+	// function myFunction(value, index, array) {
+ 	// 	txt = txt + value + "<br>"; 
+	// }
+
+
+
+	cars.push('abcsd')			//增加一个值
+	cars.pop()					// 删掉最后一个元素。返回值是元素
+	cars.shift()				// 删掉第一个元素
+	cars.unshift('begin')		//在开头添加一个元素，返回新数组长度
+	cars.splice(2,1,'t1','t2','t3')	// 第一个参数是位置，第二个参数是删除元素个数，后面的是添加的元素，返回的是删除元素组成的数组
+
+	cars[cars.length]='hhhhh'
+	result = cars;
+	result = Array.isArray(cars); //判断是否是数组
+
+
+	result = cars.toString();	//转换字符串
+
+	// result = cars.join(' ! ')	//连接字符串
+	var chars = ['glass','table','desk']
+
+	result = cars.concat(chars,chars)		//连接数组，返回是新数组，参数可以有多个数组，反正都是拼
+	result = cars.slice(1);		//从1开始切出一个新的数组
+	result = cars.slice(1,3);	//范围切片
+
+	document.getElementById('output').innerHTML=result;
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>
